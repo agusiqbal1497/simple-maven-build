@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    // environment {
+    //     JAR_NAME = 'maven-jar-sample-1.0-SNAPSHOT.jar'
+    //     DEST_PATH = '/home/pi/apps'
+    // }
+
+    stages {
+        stage('clone repo') {
+            steps {
+                git 'https://github.com/agusiqbal1497/simple-maven-build.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Archive JAR') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+    }
+}

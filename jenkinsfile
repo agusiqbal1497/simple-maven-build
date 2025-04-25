@@ -5,6 +5,9 @@ pipeline {
     //     JAR_NAME = 'maven-jar-sample-1.0-SNAPSHOT.jar'
     //     DEST_PATH = '/home/pi/apps'
     // }
+    tools {
+        maven 'Maven3'
+    }
 
     stages {
         stage('clone repo') {
@@ -13,6 +16,7 @@ pipeline {
             }
         }
         stage('build') {
+            }
             steps {
                 sh 'mvn clean package'
             }
